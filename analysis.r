@@ -1,5 +1,4 @@
 library(openxlsx)
-library(logistf)
 library(glmnet)
 library(dplyr)
 library(pROC)
@@ -106,9 +105,8 @@ for(i in 1:3){
 for(i in 1:3){
   for(sex in 1:3){
     mean.aucs=list2[[sex]][[i]]
-    # colnames(mean.aucs)=models
-    # rownames(mean.aucs)=variable.list
     mean.aucs$best.model=models[apply(mean.aucs[,1:12],1,which.max)]
+    mean.aucs$best.result=apply(mean.aucs[,1:12],1,max)
     write.xlsx(mean.aucs,paste0(genders[sex],'_',target.list[i],'.xlsx'),rowNames=T) 
   }
 }
